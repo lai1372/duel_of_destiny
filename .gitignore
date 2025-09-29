@@ -1,0 +1,15 @@
+**/[Ll]ibrary/
+**/[Ll]ogs/
+**/[Pp]ackages/
+**/[Uu]serSettings/
+**/[Pp]rojectSettings/
+**/[Tt]emp/
+.vscode/
+.DS_Store
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs

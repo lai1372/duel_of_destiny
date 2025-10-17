@@ -16,6 +16,8 @@ public abstract class Character : MonoBehaviour
 
     // Always to be set to 100 by default when a new character is instantiated
     [SerializeField] private int health;
+    [SerializeField] private int medkits;
+
 
     // To differ based on if player or enemy. Enemy will have lower power.
     [SerializeField] private int attackPower;
@@ -72,6 +74,20 @@ public abstract class Character : MonoBehaviour
     //     }
     // }
 
+    public bool useMedkit()
+    {
+        if (medkits > 0)
+        {
+            setHealth(getHealth() + 20); // Each medkit restores 20 health
+            if (getHealth() > 100)
+            {
+                setHealth(100); // Cap health at 100
+            }
+            medkits--;
+            return true;
+        }
+        return false;
+    }
 
 
 

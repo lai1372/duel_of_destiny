@@ -6,7 +6,7 @@ public class Goblin : Enemy
     }
     public override void attack(Character target)
     {
-        int damage = 10; // Goblin's attack power
-        target.takeDamage(damage); // Attack player
+        int damage = getDefaultAttackPower() + 3; // Goblin's attack power
+        target.setHealth(target.getHealth() - damage); // Attack player
     }
 }

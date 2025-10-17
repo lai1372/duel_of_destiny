@@ -4,11 +4,6 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 
 {
-    // unity properties
-    
-    Rigidbody2D rb;
-    float speed;
-    float horizontalInput;
     
     //character properties
 
@@ -20,20 +15,19 @@ public abstract class Character : MonoBehaviour
 
 
     // To differ based on if player or enemy. Enemy will have lower power.
-    [SerializeField] private int attackPower;
+    [SerializeField] private int defaultAttackPower;
     [SerializeField] string weapon;
-    // public List<GameObject> inventory;
 
     // Removed role from class diagram as not necessary to be defined. Instead, create enemy or player class
 
 
-    public Character(string playerName, int attackPower, string weapon)
+    public Character(string playerName, int attackPower)
     {
         this.playerName = playerName;
         this.health = 100;
-        this.attackPower = attackPower;
-        this.weapon = weapon;
-        // this.inventory = inventory;
+        this.defaultAttackPower = attackPower;
+        this.medkits = 1;
+
     }
 
     public string getName()
@@ -50,9 +44,18 @@ public abstract class Character : MonoBehaviour
         this.health = health;
     }
 
+    public int getDefaultAttackPower()
+    {
+        return defaultAttackPower;
+    }
+    public void setAttackPower(int attackPower)
+    {
+        this.defaultAttackPower = attackPower;
+    }
+
     public virtual void attack(Character target)
     {
-        target.setHealth(target.getHealth() - this.attackPower);
+        target.setHealth(target.getHealth() - this.defaultAttackPower);
     }
 
     public void takeDamage(int damage)
@@ -65,14 +68,6 @@ public abstract class Character : MonoBehaviour
         return this.health > 0;
     }
 
-    // public void useItem(GameObject item)
-    // {
-    //     if (inventory.Contains(item))
-    //     {
-    //         // Implement item effects here
-    //         inventory.Remove(item);
-    //     }
-    // }
 
     public bool useMedkit()
     {
@@ -93,20 +88,20 @@ public abstract class Character : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        speed = 5f;
-    }
+    // void Start()
+    // {
+    //     rb = gameObject.GetComponent<Rigidbody2D>();
+    //     speed = 5f;
+    // }
 
-    // Update is called once per frame
-    void Update()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+    // // Update is called once per frame
+    // void Update()
+    // {
+    //     horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        if (horizontalInput != 0)
-        {
-            rb.AddForce(new Vector2(horizontalInput * speed, 0f));
-        }
-    }
+    //     if (horizontalInput != 0)
+    //     {
+    //         rb.AddForce(new Vector2(horizontalInput * speed, 0f));
+    //     }
+    // }
 }

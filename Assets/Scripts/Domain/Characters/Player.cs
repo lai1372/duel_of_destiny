@@ -1,10 +1,9 @@
 using UnityEngine;
-using Domain.Characters;
 
 
     public class Player : Character
     {
-        public Player() : base()
+        public Player() : base(playerName: "Hero", attackPower: 15, weapon: "Sword")
         {
         }
     }

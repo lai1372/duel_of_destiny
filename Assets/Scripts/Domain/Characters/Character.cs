@@ -5,21 +5,11 @@ public abstract class Character : MonoBehaviour
 
 {
     
-    //character properties
-
+    // Character properties
     [SerializeField] private string playerName;
-
-    // Always to be set to 100 by default when a new character is instantiated
     [SerializeField] private int health;
     [SerializeField] private int medkits;
-
-
-    // To differ based on if player or enemy. Enemy will have lower power.
     [SerializeField] private int defaultAttackPower;
-    [SerializeField] string weapon;
-
-    // Removed role from class diagram as not necessary to be defined. Instead, create enemy or player class
-
 
     public Character(string playerName, int attackPower)
     {
@@ -84,24 +74,4 @@ public abstract class Character : MonoBehaviour
         return false;
     }
 
-
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-    //     rb = gameObject.GetComponent<Rigidbody2D>();
-    //     speed = 5f;
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-    //     horizontalInput = Input.GetAxisRaw("Horizontal");
-
-    //     if (horizontalInput != 0)
-    //     {
-    //         rb.AddForce(new Vector2(horizontalInput * speed, 0f));
-    //     }
-    // }
 }

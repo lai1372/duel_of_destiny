@@ -9,4 +9,5 @@ public class Goblin : Enemy
         int damage = getDefaultAttackPower() + 3; // Goblin's attack power
         target.setHealth(target.getHealth() - damage); // Attack player
     }
+
 }

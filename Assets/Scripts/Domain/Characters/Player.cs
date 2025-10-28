@@ -7,6 +7,7 @@ using UnityEngine;
     Rigidbody2D rb;
     float speed;
     float horizontalInput;
+    Spawner spawner;
     public Player() : base(playerName: "Hero", attackPower: 15)
     {
         
@@ -16,6 +17,9 @@ using UnityEngine;
         rb = gameObject.GetComponent<Rigidbody2D>();
         speed = 5f;
         gameObject.transform.position = new Vector2(-3f, 0f);
+
+        spawner = FindFirstObjectByType<Spawner>();
+
     }
 
     // Update is called once per frame
@@ -31,18 +35,9 @@ using UnityEngine;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // attack(insert instance of enemy here);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                attack(enemy);
-            }
+            attack(spawner.spawnedEnemy.GetComponent<Enemy>());
+            Debug.Log("Player attacked the enemy!");
+            Debug.Log("Enemy Health after attack: " + spawner.spawnedEnemy.GetComponent<Enemy>().getHealth());
         }
     }
 }

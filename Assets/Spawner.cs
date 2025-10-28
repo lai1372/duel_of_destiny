@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour
     public Transform spawnPoints;
     public string prefabName;
 
+    public GameObject spawnedEnemy;
+
     public void SpawnRandomPrefab()
     {
         if (prefabsToSpawn.Count == 0)
@@ -21,7 +23,9 @@ public class Spawner : MonoBehaviour
         // Select a random prefab
         int prefabIndex = Random.Range(0, prefabsToSpawn.Count);
         GameObject prefabToSpawn = prefabsToSpawn[prefabIndex];
+        spawnedEnemy = prefabToSpawn;
         prefabName = prefabToSpawn.name;
+
         Debug.Log("Spawning prefab: " + prefabName);
 
         // Select a random spawn point
@@ -37,6 +41,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
        SpawnRandomPrefab(); 
+       
     }
 
     // Update is called once per frame

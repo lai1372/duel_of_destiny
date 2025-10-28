@@ -14,4 +14,4 @@ using UnityEngine;
         Debug.Log("Enemy Health: " + getHealth());
         Debug.Log("Enemy Attack Power: " + getDefaultAttackPower());
     }
-    }
+}

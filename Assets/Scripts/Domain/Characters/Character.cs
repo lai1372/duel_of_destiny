@@ -29,10 +29,10 @@ public abstract class Character : MonoBehaviour
         return health;
     }
 
-    public void setHealth(int health)
-    {
-        this.health = health;
-    }
+public void setHealth(int health)
+{
+    this.health = Mathf.Clamp(health, 0, 100); // Keeps health between 0 and 100
+}
 
     public int getDefaultAttackPower()
     {
@@ -48,10 +48,14 @@ public abstract class Character : MonoBehaviour
         target.setHealth(target.getHealth() - this.defaultAttackPower);
     }
 
-    public void takeDamage(int damage)
+public void takeDamage(int damage)
+{
+    health -= damage;
+    if (health < 0)
     {
-        this.health -= damage;
+        health = 0;
     }
+}
 
     public bool isAlive()
     {
@@ -61,6 +65,7 @@ public abstract class Character : MonoBehaviour
 
     public bool useMedkit()
     {
+        Debug.Log("Attempting to use medkit. Medkits available: " + medkits);
         if (medkits > 0)
         {
             setHealth(getHealth() + 20); // Each medkit restores 20 health
@@ -68,7 +73,8 @@ public abstract class Character : MonoBehaviour
             {
                 setHealth(100); // Cap health at 100
             }
-            medkits--;
+            medkits--; // Decrease medkit count
+            Debug.Log("Medkit used. Current health: " + getHealth() + ". Medkits left: " + medkits);
             return true;
         }
         return false;

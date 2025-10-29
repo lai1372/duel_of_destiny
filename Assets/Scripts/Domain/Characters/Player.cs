@@ -23,21 +23,41 @@ using UnityEngine;
     }
 
     // Update is called once per frame
-    void Update()
+void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+    if (!isAlive())
+{
+    FindFirstObjectByType<GameManager>().GameOver("Enemy");
+    gameObject.SetActive(false); // Optional: hide player
+}
 
-        if (horizontalInput != 0)
-        {
-            rb.AddForce(new Vector2(horizontalInput * speed, 0f));
-        }
+    horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+    if (horizontalInput != 0)
+    {
+        rb.AddForce(new Vector2(horizontalInput * speed, 0f));
+    }
+
+    if (Input.GetKeyDown(KeyCode.UpArrow))
+    {
+        rb.AddForce(Vector2.up * 300f); // Adjust force as needed
+    }
+
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+        attack(spawner.spawnedEnemy.GetComponent<Enemy>());
+        Debug.Log("Player attacked the enemy!");
+        Debug.Log("Enemy Health after attack: " + spawner.spawnedEnemy.GetComponent<Enemy>().getHealth());
+
+        if (!spawner.spawnedEnemy.GetComponent<Enemy>().isAlive())
         {
-            // attack(insert instance of enemy here);
-            attack(spawner.spawnedEnemy.GetComponent<Enemy>());
-            Debug.Log("Player attacked the enemy!");
-            Debug.Log("Enemy Health after attack: " + spawner.spawnedEnemy.GetComponent<Enemy>().getHealth());
+            FindFirstObjectByType<GameManager>().GameOver("Player");
         }
     }
+
+    if (!isAlive())
+    {
+        FindFirstObjectByType<GameManager>().GameOver("Enemy");
+    }
+}
 }

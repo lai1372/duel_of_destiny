@@ -9,12 +9,12 @@ public TMP_Text winnerText;
     public Button playAgainButton;
     public Button quitButton;
 
-    void Start()
-    {
-        gameOverPanel.SetActive(false);
-        playAgainButton.onClick.AddListener(PlayAgain);
-        quitButton.onClick.AddListener(QuitGame);
-    }
+void Start()
+{
+    gameOverPanel.SetActive(false); // Ensures it's hidden on scene load
+    playAgainButton.onClick.AddListener(PlayAgain);
+    quitButton.onClick.AddListener(QuitGame);
+}
 
     public void GameOver(string winner)
     {

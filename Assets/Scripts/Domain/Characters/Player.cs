@@ -30,7 +30,18 @@ void Update()
     FindFirstObjectByType<GameManager>().GameOver("Enemy");
     gameObject.SetActive(false); // Optional: hide player
 }
-
+if (Input.GetKeyDown(KeyCode.M))
+{
+    bool used = useMedkit();
+    if (used)
+    {
+        Debug.Log("Player used a medkit!");
+    }
+    else
+    {
+        Debug.Log("Player tried to use a medkit but had none.");
+    }
+}
     horizontalInput = Input.GetAxisRaw("Horizontal");
 
     if (horizontalInput != 0)

@@ -19,6 +19,11 @@ public abstract class Character : MonoBehaviour
         this.medkits = 1;
 
     }
+    void Awake()
+{
+    health = 100;
+    medkits = 1;
+}
 
     public string getName()
     {

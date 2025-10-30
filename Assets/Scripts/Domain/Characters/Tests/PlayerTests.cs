@@ -50,6 +50,22 @@ public class PlayerTests
     }
 
     [Test]
+    public void Player_Health_Does_Not_Go_Below_Zero()
+    {
+        // Arrange
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        int damage = 150;
+
+        // Act
+        player.takeDamage(damage);
+        int currentHealth = player.getHealth();
+
+        // Assert
+        Assert.AreEqual(0, currentHealth);
+    }
+
+    [Test]
     public void Player_Heals_Correctly()
     {
         // Arrange
@@ -66,7 +82,7 @@ public class PlayerTests
         Assert.AreEqual(70, currentHealth);
     }
 
-    
+
     [Test]
     public void Player_Health_Does_Not_Exceed_Maximum()
     {

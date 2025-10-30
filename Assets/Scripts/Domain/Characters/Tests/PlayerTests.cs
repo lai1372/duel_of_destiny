@@ -48,5 +48,39 @@ public class PlayerTests
         // Assert
         Assert.IsFalse(isAlive);
     }
+
+    [Test]
+    public void Player_Heals_Correctly()
+    {
+        // Arrange
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        int damage = 50;
+
+        // Act
+        player.takeDamage(damage);
+        player.useMedkit();
+        int currentHealth = player.getHealth();
+
+        // Assert
+        Assert.AreEqual(70, currentHealth);
+    }
+
+    
+    [Test]
+    public void Player_Health_Does_Not_Exceed_Maximum()
+    {
+        // Arrange
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+    
+
+        // Act
+        player.useMedkit();
+        int currentHealth = player.getHealth();
+
+        // Assert
+        Assert.AreEqual(100, currentHealth);
+    }
 }
 

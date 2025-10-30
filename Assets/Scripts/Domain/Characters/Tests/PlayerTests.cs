@@ -1,6 +1,9 @@
 using UnityEngine;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+
+
+
 public class PlayerTests
 {
     [Test]
@@ -97,6 +100,24 @@ public class PlayerTests
 
         // Assert
         Assert.AreEqual(100, currentHealth);
+    }
+
+    [Test]
+    public void Player_Can_Only_Use_1_Medkit()
+    {
+        // Arrange
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        int damage = 50;
+        int availableMedkits = player.getMedkits();
+
+        // Act
+        player.takeDamage(damage);
+        player.useMedkit(); // Should succeed
+        player.useMedkit(); // Should fail as only 1 medkit is available
+
+        // Assert
+        Assert.AreEqual(0, player.getMedkits());
     }
 }
 

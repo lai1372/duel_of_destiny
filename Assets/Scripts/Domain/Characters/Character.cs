@@ -34,6 +34,11 @@ public abstract class Character : MonoBehaviour
         return health;
     }
 
+    public int getMedkits()
+    {
+        return medkits;
+    }
+
     public void setHealth(int health)
     {
         this.health = Mathf.Clamp(health, 0, 100); // Keeps health between 0 and 100
@@ -82,6 +87,7 @@ public abstract class Character : MonoBehaviour
             Debug.Log("Medkit used. Current health: " + getHealth() + ". Medkits left: " + medkits);
             return true;
         }
+        Debug.Log("No medkits left to use.");
         return false;
     }
 

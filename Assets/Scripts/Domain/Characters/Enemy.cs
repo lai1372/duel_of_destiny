@@ -1,8 +1,9 @@
 using UnityEngine;
 
-
+// TODO: Enemy to use medkit and follow player
     public abstract class Enemy : Character
 {
+
  [SerializeField] GameObject player;
     public Enemy() : base(playerName: "Enemy", attackPower: 5)
     {

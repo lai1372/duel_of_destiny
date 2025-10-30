@@ -32,5 +32,21 @@ public class PlayerTests
         // Assert
         Assert.AreEqual(80, currentHealth);
     }
+
+    [Test]
+    public void Player_is_Dead_When_Health_Reaches_Zero()
+    {
+        // Arrange
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        int damage = 100;
+
+        // Act
+        player.takeDamage(damage);
+        bool isAlive = player.isAlive();
+
+        // Assert
+        Assert.IsFalse(isAlive);
+    }
 }
 

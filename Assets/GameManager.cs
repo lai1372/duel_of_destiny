@@ -5,16 +5,16 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverPanel;
-public TMP_Text winnerText;
+    public TMP_Text winnerText;
     public Button playAgainButton;
     public Button quitButton;
 
-void Start()
-{
-    gameOverPanel.SetActive(false); // Ensures it's hidden on scene load
-    playAgainButton.onClick.AddListener(PlayAgain);
-    quitButton.onClick.AddListener(QuitGame);
-}
+    void Start()
+    {
+        gameOverPanel.SetActive(false); // Ensures it's hidden on scene load
+        playAgainButton.onClick.AddListener(PlayAgain);
+        quitButton.onClick.AddListener(QuitGame);
+    }
 
     public void GameOver(string winner)
     {
@@ -33,11 +33,11 @@ void Start()
     {
         Application.Quit();
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-    #else
+#else
         Application.Quit();
-    #endif
-}
-    
+#endif
+    }
+
 }

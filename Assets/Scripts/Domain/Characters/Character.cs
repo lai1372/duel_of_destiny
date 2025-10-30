@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 
 {
-    
+
     // Character properties
     [SerializeField] private string playerName;
     [SerializeField] private int health;
@@ -20,10 +20,10 @@ public abstract class Character : MonoBehaviour
 
     }
     void Awake()
-{
-    health = 100;
-    medkits = 1;
-}
+    {
+        health = 100;
+        medkits = 1;
+    }
 
     public string getName()
     {
@@ -34,10 +34,10 @@ public abstract class Character : MonoBehaviour
         return health;
     }
 
-public void setHealth(int health)
-{
-    this.health = Mathf.Clamp(health, 0, 100); // Keeps health between 0 and 100
-}
+    public void setHealth(int health)
+    {
+        this.health = Mathf.Clamp(health, 0, 100); // Keeps health between 0 and 100
+    }
 
     public int getDefaultAttackPower()
     {
@@ -53,14 +53,14 @@ public void setHealth(int health)
         target.setHealth(target.getHealth() - this.defaultAttackPower);
     }
 
-public void takeDamage(int damage)
-{
-    health -= damage;
-    if (health < 0)
+    public void takeDamage(int damage)
     {
-        health = 0;
+        health -= damage;
+        if (health < 0)
+        {
+            health = 0;
+        }
     }
-}
 
     public bool isAlive()
     {

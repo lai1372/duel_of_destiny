@@ -89,7 +89,7 @@ public class PlayerTests
         // Arrange
         GameObject playerObject = new GameObject();
         Player player = playerObject.AddComponent<Player>();
-    
+
 
         // Act
         player.useMedkit();

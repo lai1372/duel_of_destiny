@@ -1,53 +1,53 @@
-    using System.Collections.Generic;
-    using UnityEngine;
-    public interface ISpawnable
+using System.Collections.Generic;
+using UnityEngine;
+public interface ISpawnable
+{
+    void Spawn();
+}
+public class Spawner : MonoBehaviour
+{
+    public List<GameObject> prefabsToSpawn;
+    public Transform spawnPoints;
+    public string prefabName;
+
+    public GameObject spawnedEnemy;
+
+    public void SpawnRandomPrefab()
     {
-        void Spawn();
+        if (prefabsToSpawn.Count == 0)
+        {
+            Debug.LogWarning("No prefabs to spawn or no spawn points defined.");
+            return;
+        }
+
+        // Select a random prefab
+        int prefabIndex = Random.Range(0, prefabsToSpawn.Count);
+        GameObject prefabToSpawn = prefabsToSpawn[prefabIndex];
+        spawnedEnemy = prefabToSpawn;
+        prefabName = prefabToSpawn.name;
+
+        Debug.Log("Spawning prefab: " + prefabName);
+
+        // Select a random spawn point
+        // int spawnPointIndex = Random.Range(0, spawnPoints.childCount);
+
+        // Transform spawnPoint = spawnPoints.GetChild(spawnPointIndex);
+
+        // Instantiate the prefab at the selected spawn point
+        Instantiate(prefabToSpawn, this.transform.position, this.transform.rotation);
+
+
     }
-    public class Spawner : MonoBehaviour
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        public List<GameObject> prefabsToSpawn;
-        public Transform spawnPoints;
-        public string prefabName;
+        SpawnRandomPrefab();
 
-        public GameObject spawnedEnemy;
-
-        public void SpawnRandomPrefab()
-        {
-            if (prefabsToSpawn.Count == 0)
-            {
-                Debug.LogWarning("No prefabs to spawn or no spawn points defined.");
-                return;
-            }
-
-            // Select a random prefab
-            int prefabIndex = Random.Range(0, prefabsToSpawn.Count);
-            GameObject prefabToSpawn = prefabsToSpawn[prefabIndex];
-            spawnedEnemy = prefabToSpawn;
-            prefabName = prefabToSpawn.name;
-
-            Debug.Log("Spawning prefab: " + prefabName);
-
-            // Select a random spawn point
-            // int spawnPointIndex = Random.Range(0, spawnPoints.childCount);
-
-            // Transform spawnPoint = spawnPoints.GetChild(spawnPointIndex);
-
-            // Instantiate the prefab at the selected spawn point
-            Instantiate(prefabToSpawn, this.transform.position, this.transform.rotation);
-            
-            
-        }
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        SpawnRandomPrefab(); 
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}

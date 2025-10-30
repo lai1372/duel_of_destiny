@@ -15,7 +15,7 @@ using UnityEngine;
      void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        speed = 5f;
+        speed = 3f;
         gameObject.transform.position = new Vector2(-3f, 0f);
 
         spawner = FindFirstObjectByType<Spawner>();
@@ -51,7 +51,7 @@ if (Input.GetKeyDown(KeyCode.M))
 
     if (Input.GetKeyDown(KeyCode.UpArrow))
     {
-        rb.AddForce(Vector2.up * 300f); // Adjust force as needed
+        rb.AddForce(Vector2.up * 500f); // Adjust force as needed
     }
 
     if (Input.GetKeyDown(KeyCode.Space))

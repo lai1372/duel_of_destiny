@@ -36,6 +36,9 @@ public class Spawner : MonoBehaviour
         // Instantiate the prefab at the selected spawn point
         Instantiate(prefabToSpawn, this.transform.position, this.transform.rotation);
 
+        Enemy enemyComponent = spawnedEnemy.GetComponent<Enemy>();
+        Debug.Log("Spawned enemy attack power: " + enemyComponent.getAttackPower());
+
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

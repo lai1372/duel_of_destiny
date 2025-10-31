@@ -9,6 +9,8 @@ public abstract class Enemy : Character
     {
     }
 
+    public abstract int getAttackPower();
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -25,9 +27,7 @@ public abstract class Enemy : Character
     void Start()
     {
         transform.position = new Vector2(3f, 0f);
-        Debug.Log("Enemy spawned at position: " + gameObject.transform.position);
         Debug.Log("Enemy Health: " + getHealth());
-        Debug.Log("Enemy Attack Power: " + getDefaultAttackPower());
     }
 
     void Update()

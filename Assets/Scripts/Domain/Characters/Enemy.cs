@@ -5,6 +5,8 @@ public abstract class Enemy : Character
 {
 
     [SerializeField] GameObject player;
+    [SerializeField] float defaultStep = 0.05f;
+
     public Enemy() : base(playerName: "Enemy", attackPower: 5)
     {
     }
@@ -14,9 +16,9 @@ public abstract class Enemy : Character
 
     void OnCollisionEnter2D(Collision2D collision) // Detect collision with player, attack on contact
     {
-        if (collision.gameObject.CompareTag("Player")) 
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Character playerCharacter = collision.gameObject.GetComponent<Character>(); 
+            Character playerCharacter = collision.gameObject.GetComponent<Character>();
             if (playerCharacter != null)
             {
                 attack(playerCharacter);
@@ -28,8 +30,10 @@ public abstract class Enemy : Character
     void Start()
     {
         // Initialize enemy position
-        transform.position = new Vector2(3f, 0f);
+        // transform.position = new Vector2(3f, 0f);
         Debug.Log("Enemy Health: " + getHealth());
+
+        player = GameObject.FindWithTag("Player");
 
     }
 
@@ -41,14 +45,15 @@ public abstract class Enemy : Character
         // Move towards player
         if (player != null && isAlive())
         {
-            float step = 2f * Time.deltaTime;
+            float step = defaultStep * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+            Debug.Log("Enemy moving towards player. Enemy Position: " + transform.position + " Player Position: " + player.transform.position);
         }
 
         timer += Time.deltaTime;
         if (timer >= 1f)
         {
-            Debug.Log("Enemy Update triggered. Time: " + Time.time);
+            // Debug.Log("Enemy Update triggered. Time: " + Time.time);
             timer = 0f;
         }
 

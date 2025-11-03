@@ -137,7 +137,8 @@ MonoBehaviour:
   health: 100
   medkits: 0
   defaultAttackPower: 5
-  player: {fileID: 4148955433655033463, guid: 19b110dca4e2849f4b564dd09e0482f4, type: 3}
+  player: {fileID: 0}
+  defaultStep: 0.5
 --- !u!61 &3441386815362010451
 BoxCollider2D:
   m_ObjectHideFlags: 0

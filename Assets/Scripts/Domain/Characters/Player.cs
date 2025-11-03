@@ -15,8 +15,8 @@ public class Player : Character
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        speed = 3f;
-        gameObject.transform.position = new Vector2(-3f, 0f);
+        speed = 3f; // Movement speed
+        gameObject.transform.position = new Vector2(-3f, 0f); // Starting position
 
         spawner = FindFirstObjectByType<Spawner>();
 
@@ -25,11 +25,14 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
+        // If player is not alive, trigger game over with Enemy as winner
         if (!isAlive())
         {
             FindFirstObjectByType<GameManager>().GameOver("Enemy");
-            gameObject.SetActive(false); // Optional: hide player
+            gameObject.SetActive(false);
         }
+
+        // Handle medkit usage on 'M' key press
         if (Input.GetKeyDown(KeyCode.M))
         {
             bool used = useMedkit();
@@ -42,6 +45,8 @@ public class Player : Character
                 Debug.Log("Player tried to use a medkit but had none.");
             }
         }
+
+        // Handle movement input with arrow keys
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         if (horizontalInput != 0)
@@ -49,11 +54,13 @@ public class Player : Character
             rb.AddForce(new Vector2(horizontalInput * speed, 0f));
         }
 
+        // Handle jump when up arrow key pressed
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            rb.AddForce(Vector2.up * 500f); // Adjust force as needed
+            rb.AddForce(Vector2.up * 500f);
         }
 
+        // Handle attack on spacebar press
         if (Input.GetKeyDown(KeyCode.Space))
         {
             attack(spawner.spawnedEnemy.GetComponent<Enemy>());
@@ -65,7 +72,7 @@ public class Player : Character
                 FindFirstObjectByType<GameManager>().GameOver("Player");
             }
         }
-
+        // If player is not alive, trigger game over with Enemy as winner
         if (!isAlive())
         {
             FindFirstObjectByType<GameManager>().GameOver("Enemy");

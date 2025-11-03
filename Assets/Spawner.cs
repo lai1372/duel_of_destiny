@@ -28,11 +28,6 @@ public class Spawner : MonoBehaviour
 
         Debug.Log("Spawning prefab: " + prefabName);
 
-        // Select a random spawn point
-        // int spawnPointIndex = Random.Range(0, spawnPoints.childCount);
-
-        // Transform spawnPoint = spawnPoints.GetChild(spawnPointIndex);
-
         // Instantiate the prefab at the selected spawn point
         Instantiate(prefabToSpawn, this.transform.position, this.transform.rotation);
 
@@ -41,14 +36,12 @@ public class Spawner : MonoBehaviour
 
 
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SpawnRandomPrefab();
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

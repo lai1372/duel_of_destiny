@@ -9,13 +9,14 @@ public abstract class Enemy : Character
     {
     }
 
+    // Abstract method to get attack power
     public abstract int getAttackPower();
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision) // Detect collision with player, attack on contact
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")) 
         {
-            Character playerCharacter = collision.gameObject.GetComponent<Character>();
+            Character playerCharacter = collision.gameObject.GetComponent<Character>(); 
             if (playerCharacter != null)
             {
                 attack(playerCharacter);
@@ -26,9 +27,14 @@ public abstract class Enemy : Character
     }
     void Start()
     {
+        // Initialize enemy position
         transform.position = new Vector2(3f, 0f);
         Debug.Log("Enemy Health: " + getHealth());
+
     }
+
+    float timer = 0f;
+
 
     void Update()
     {
@@ -38,6 +44,14 @@ public abstract class Enemy : Character
             float step = 2f * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
         }
+
+        timer += Time.deltaTime;
+        if (timer >= 1f)
+        {
+            Debug.Log("Enemy Update triggered. Time: " + Time.time);
+            timer = 0f;
+        }
+
 
         // Use medkit if health is 20 or less
         if (getHealth() <= 20)
@@ -52,6 +66,7 @@ public abstract class Enemy : Character
                 Debug.Log("Enemy tried to use a medkit but had none.");
             }
         }
+
 
         // Trigger Game Over when enemy dies
         if (!isAlive())

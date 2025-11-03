@@ -63,19 +63,33 @@ public class Player : Character
         // Handle attack on spacebar press
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            attack(spawner.spawnedEnemy.GetComponent<Enemy>());
-            Debug.Log("Player attacked the enemy!");
-            Debug.Log("Enemy Health after attack: " + spawner.spawnedEnemy.GetComponent<Enemy>().getHealth());
-
-            if (!spawner.spawnedEnemy.GetComponent<Enemy>().isAlive())
+            GameObject enemyObj = spawner.spawnedEnemy;
+            if (enemyObj != null)
             {
-                FindFirstObjectByType<GameManager>().GameOver("Player");
+                float distance = Vector2.Distance(transform.position, enemyObj.transform.position);
+                if (distance <= 5f)
+                {
+                    Enemy enemy = enemyObj.GetComponent<Enemy>();
+                    attack(enemy);
+                    Debug.Log("Player attacked the enemy!");
+                    Debug.Log("Enemy Health after attack: " + enemy.getHealth());
+
+                    if (!enemy.isAlive())
+                    {
+                        FindFirstObjectByType<GameManager>().GameOver("Player");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Enemy is too far to attack.");
+                }
             }
-        }
-        // If player is not alive, trigger game over with Enemy as winner
-        if (!isAlive())
-        {
-            FindFirstObjectByType<GameManager>().GameOver("Enemy");
+
+            // If player is not alive, trigger game over with Enemy as winner
+            if (!isAlive())
+            {
+                FindFirstObjectByType<GameManager>().GameOver("Enemy");
+            }
         }
     }
 }

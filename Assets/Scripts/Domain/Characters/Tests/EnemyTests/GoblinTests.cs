@@ -26,14 +26,15 @@ public class GoblinTests
         // Arrange - new instance of Goblin
         GameObject goblinObject = new GameObject();
         Goblin goblin = goblinObject.AddComponent<Goblin>();
-        int damage = 20;
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
 
-        // Act - apply damage of 20
-        goblin.takeDamage(damage);
+        // Act - apply damage of 15
+        player.attack(goblin);
         int currentHealth = goblin.getHealth();
 
         // Assert - validate health after damage is 80
-        Assert.AreEqual(80, currentHealth);
+        Assert.AreEqual(85, currentHealth);
     }
 
     [Test]
@@ -110,6 +111,7 @@ public class GoblinTests
         // Arrange - new instance of Goblin
         GameObject goblinObject = new GameObject();
         Goblin goblin = goblinObject.AddComponent<Goblin>();
+        
         int damage = 50;
         int availableMedkits = goblin.getMedkits();
 

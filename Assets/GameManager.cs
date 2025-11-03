@@ -20,11 +20,14 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         winnerText.text = winner + " has won!";
+
+        // Destroy(GameObject.FindWithTag("Player"));
+        // Destroy(GameObject.FindWithTag("Enemy"));
+
     }
 
     public void PlayAgain()
     {
-
         gameOverPanel.SetActive(false); // Hide panel immediately
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

@@ -20,21 +20,23 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        // Select a random prefab
         int prefabIndex = Random.Range(0, prefabsToSpawn.Count);
         GameObject prefabToSpawn = prefabsToSpawn[prefabIndex];
-        spawnedEnemy = prefabToSpawn;
-        prefabName = prefabToSpawn.name;
+
+        spawnedEnemy = Instantiate(prefabToSpawn, transform.position, transform.rotation);
+        prefabName = spawnedEnemy.name;
 
         Debug.Log("Spawning prefab: " + prefabName);
 
-        // Instantiate the prefab at the selected spawn point
-        Instantiate(prefabToSpawn, this.transform.position, this.transform.rotation);
-
         Enemy enemyComponent = spawnedEnemy.GetComponent<Enemy>();
-        Debug.Log("Spawned enemy attack power: " + enemyComponent.getAttackPower());
-
-
+        if (enemyComponent != null)
+        {
+            Debug.Log("Spawned enemy attack power: " + enemyComponent.getAttackPower());
+        }
+        else
+        {
+            Debug.LogWarning("Enemy component not found on spawned enemy.");
+        }
     }
     void Start()
     {

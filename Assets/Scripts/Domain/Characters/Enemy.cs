@@ -37,9 +37,6 @@ public abstract class Enemy : Character
 
     }
 
-    float timer = 0f;
-
-
     void Update()
     {
         // Move towards player
@@ -47,14 +44,6 @@ public abstract class Enemy : Character
         {
             float step = defaultStep * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
-            Debug.Log("Enemy moving towards player. Enemy Position: " + transform.position + " Player Position: " + player.transform.position);
-        }
-
-        timer += Time.deltaTime;
-        if (timer >= 1f)
-        {
-            // Debug.Log("Enemy Update triggered. Time: " + Time.time);
-            timer = 0f;
         }
 
 

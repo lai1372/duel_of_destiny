@@ -89,6 +89,7 @@ public class Player : Character
             if (!isAlive())
             {
                 FindFirstObjectByType<GameManager>().GameOver("Enemy");
+
             }
         }
     }

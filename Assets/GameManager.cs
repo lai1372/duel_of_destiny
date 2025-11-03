@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         winnerText.text = winner + " has won!";
 
-        // Destroy(GameObject.FindWithTag("Player"));
-        // Destroy(GameObject.FindWithTag("Enemy"));
+        Destroy(GameObject.FindWithTag("Player"));
+        Destroy(GameObject.FindWithTag("Enemy"));
 
     }
 

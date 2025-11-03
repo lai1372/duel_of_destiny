@@ -74,8 +74,6 @@ public abstract class Enemy : Character
             {
                 Debug.LogWarning("GameManager not found in scene.");
             }
-
-            Destroy(gameObject);
         }
     }
 

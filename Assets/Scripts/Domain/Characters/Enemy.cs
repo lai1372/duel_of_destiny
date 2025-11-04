@@ -48,18 +48,12 @@ public abstract class Enemy : Character
 
 
         // Use medkit if health is 20 or less
-        if (getHealth() <= 20)
+        if (getHealth() <= 20 && getMedkits() > 0)
         {
-            bool used = useMedkit();
-            if (used)
-            {
-                Debug.Log("Enemy used a medkit!");
-            }
-            else
-            {
-                Debug.Log("Enemy tried to use a medkit but had none.");
-            }
+            useMedkit();
+            Debug.Log("Enemy used a medkit!");
         }
+    
 
 
         // Trigger Game Over when enemy dies
@@ -71,9 +65,9 @@ public abstract class Enemy : Character
                 gm.GameOver("Player");
             }
             else
-            {
-                Debug.LogWarning("GameManager not found in scene.");
-            }
+{
+    Debug.LogWarning("GameManager not found in scene.");
+}
         }
     }
 

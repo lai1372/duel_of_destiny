@@ -6,13 +6,15 @@ public class PlayerSpawner : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        Debug.Log("Spawning prefab: Player");
+        Debug.Log("Spawning Player");
 
 
         GameObject playerInstance = Instantiate(playerPrefab, transform.position, transform.rotation);
 
         Player playerComponent = playerInstance.GetComponent<Player>();
         Debug.Log("Spawned player attack power: " + playerComponent.getDefaultAttackPower());
+        Debug.Log("Player health: " + playerComponent.getHealth());
+
     }
 
     void Start()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Character
 {
     Rigidbody2D rb;
-    float speed;
+    [SerializeField] float speed;
     float horizontalInput;
     Spawner spawner;
     public Player() : base(playerName: "Hero")
@@ -15,7 +15,7 @@ public class Player : Character
 
     public override int getAttackPower()
     {
-        return getDefaultAttackPower() + 15; // Player has a bonus of 15 to default attack power
+        return getDefaultAttackPower() + 9; // Player has a bonus of 15 to default attack power
     }
     public override void attack(Character target)
     {

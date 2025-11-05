@@ -121,7 +121,7 @@ public class PlayerTests
     }
 
     [Test]
-    public void Player_Health_Stays_100_When_Instantiated_with_500_Health()
+    public void Player_Health_Stays_100_When_Instantiated_with_Health_Greater_Than_100()
     {
         // Arrange - new instance of Player with 500 health
         GameObject playerObject = new GameObject();

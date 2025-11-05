@@ -6,6 +6,10 @@ using NUnit.Framework.Internal;
 
 public class GoblinTests
 {
+    // -----------------------------------------------
+    // Normal tests
+    // -----------------------------------------------
+
     [Test]
     public void Goblin_Starts_With_Correct_Health()
     {
@@ -37,6 +41,23 @@ public class GoblinTests
     }
 
     [Test]
+    public void Goblin_Heals_Correctly()
+    {
+        // Arrange - new instance of Goblin
+        GameObject goblinObject = new GameObject();
+        Goblin goblin = goblinObject.AddComponent<Goblin>();
+        int damage = 50;
+
+        // Act - apply damage of 50 and then heal with medkit, adding 20 health
+        goblin.takeDamage(damage);
+        goblin.useMedkit();
+        int currentHealth = goblin.getHealth();
+
+        // Assert - validate health after healing is 70
+        Assert.AreEqual(70, currentHealth);
+    }
+
+    [Test]
     public void Goblin_is_Dead_When_Health_Reaches_Zero()
     {
         // Arrange - new instance of Goblin
@@ -52,6 +73,10 @@ public class GoblinTests
         Assert.IsFalse(isAlive);
     }
 
+
+    // -----------------------------------------------
+    // Edge Case tests
+    // -----------------------------------------------
 
     [Test]
     public void Goblin_Health_Does_Not_Go_Below_Zero()
@@ -69,24 +94,6 @@ public class GoblinTests
         Assert.AreEqual(0, currentHealth);
 
     }
-
-    [Test]
-    public void Goblin_Heals_Correctly()
-    {
-        // Arrange - new instance of Goblin
-        GameObject goblinObject = new GameObject();
-        Goblin goblin = goblinObject.AddComponent<Goblin>();
-        int damage = 50;
-
-        // Act - apply damage of 50 and then heal with medkit, adding 20 health
-        goblin.takeDamage(damage);
-        goblin.useMedkit();
-        int currentHealth = goblin.getHealth();
-
-        // Assert - validate health after healing is 70
-        Assert.AreEqual(70, currentHealth);
-    }
-
 
     [Test]
     public void Goblin_Health_Does_Not_Exceed_Maximum()
@@ -122,6 +129,10 @@ public class GoblinTests
         // Assert - validate only 1 medkit was available and used
         Assert.AreEqual(0, goblin.getMedkits());
     }
+
+    // -----------------------------------------------
+    // Invalid input tests
+    // -----------------------------------------------
 
     [Test]
     public void Goblin_Health_Stays_100_When_Instantiated_with_500_Health()

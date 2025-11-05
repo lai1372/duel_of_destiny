@@ -6,6 +6,10 @@ using NUnit.Framework.Internal;
 
 public class MageTests
 {
+    // -----------------------------------------------
+    // Normal tests
+    // -----------------------------------------------
+
     [Test]
     public void Mage_Starts_With_Correct_Health()
     {
@@ -37,6 +41,23 @@ public class MageTests
     }
 
     [Test]
+    public void Mage_Heals_Correctly()
+    {
+        // Arrange - new instance of Mage
+        GameObject mageObject = new GameObject();
+        Mage mage = mageObject.AddComponent<Mage>();
+        int damage = 50;
+
+        // Act - apply damage of 50 and then heal with medkit, adding 20 health
+        mage.takeDamage(damage);
+        mage.useMedkit();
+        int currentHealth = mage.getHealth();
+
+        // Assert - validate health after healing is 70
+        Assert.AreEqual(70, currentHealth);
+    }
+
+    [Test]
     public void Mage_is_Dead_When_Health_Reaches_Zero()
     {
         // Arrange - new instance of Mage
@@ -52,6 +73,9 @@ public class MageTests
         Assert.IsFalse(isAlive);
     }
 
+    // -----------------------------------------------
+    // Edge case tests
+    // -----------------------------------------------
 
     [Test]
     public void Mage_Health_Does_Not_Go_Below_Zero()
@@ -69,24 +93,6 @@ public class MageTests
         Assert.AreEqual(0, currentHealth);
 
     }
-
-    [Test]
-    public void Mage_Heals_Correctly()
-    {
-        // Arrange - new instance of Mage
-        GameObject mageObject = new GameObject();
-        Mage mage = mageObject.AddComponent<Mage>();
-        int damage = 50;
-
-        // Act - apply damage of 50 and then heal with medkit, adding 20 health
-        mage.takeDamage(damage);
-        mage.useMedkit();
-        int currentHealth = mage.getHealth();
-
-        // Assert - validate health after healing is 70
-        Assert.AreEqual(70, currentHealth);
-    }
-
 
     [Test]
     public void Mage_Health_Does_Not_Exceed_Maximum()
@@ -121,6 +127,10 @@ public class MageTests
         // Assert - validate only 1 medkit was available and used
         Assert.AreEqual(0, mage.getMedkits());
     }
+
+    // -----------------------------------------------
+    // Invalid input tests
+    // -----------------------------------------------
 
     [Test]
     public void Mage_Health_Stays_100_When_Instantiated_with_500_Health()

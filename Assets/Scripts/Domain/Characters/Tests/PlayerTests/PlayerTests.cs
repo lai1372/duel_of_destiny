@@ -6,6 +6,11 @@ using NUnit.Framework.Internal;
 
 public class PlayerTests
 {
+
+    // -----------------------------------------------
+    // Normal tests
+    // -----------------------------------------------
+    
     [Test]
     public void Player_Starts_With_Correct_Health()
     {
@@ -37,38 +42,6 @@ public class PlayerTests
     }
 
     [Test]
-    public void Player_is_Dead_When_Health_Reaches_Zero()
-    {
-        // Arrange - new instance of Player
-        GameObject playerObject = new GameObject();
-        Player player = playerObject.AddComponent<Player>();
-        int damage = 100;
-
-        // Act - apply damage of 100
-        player.takeDamage(damage);
-        bool isAlive = player.isAlive();
-
-        // Assert - validate player is dead
-        Assert.IsFalse(isAlive);
-    }
-
-    [Test]
-    public void Player_Health_Does_Not_Go_Below_Zero()
-    {
-        // Arrange - new instance of Player
-        GameObject playerObject = new GameObject();
-        Player player = playerObject.AddComponent<Player>();
-        int damage = 150;
-
-        // Act - apply damage of 150
-        player.takeDamage(damage);
-        int currentHealth = player.getHealth();
-
-        // Assert - validate health does not go below 0
-        Assert.AreEqual(0, currentHealth);
-    }
-
-    [Test]
     public void Player_Heals_Correctly()
     {
         // Arrange - new instance of Player
@@ -85,6 +58,41 @@ public class PlayerTests
         Assert.AreEqual(70, currentHealth);
     }
 
+    [Test]
+    public void Player_is_Dead_When_Health_Reaches_Zero()
+    {
+        // Arrange - new instance of Player
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        int damage = 100;
+
+        // Act - apply damage of 100
+        player.takeDamage(damage);
+        bool isAlive = player.isAlive();
+
+        // Assert - validate player is dead
+        Assert.IsFalse(isAlive);
+    }
+
+    // -----------------------------------------------
+    // Edge Case tests
+    // -----------------------------------------------
+
+    [Test]
+    public void Player_Health_Does_Not_Go_Below_Zero()
+    {
+        // Arrange - new instance of Player
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        int damage = 150;
+
+        // Act - apply damage of 150
+        player.takeDamage(damage);
+        int currentHealth = player.getHealth();
+
+        // Assert - validate health does not go below 0
+        Assert.AreEqual(0, currentHealth);
+    }
 
     [Test]
     public void Player_Health_Does_Not_Exceed_Maximum()
@@ -119,6 +127,11 @@ public class PlayerTests
         // Assert - validate only 1 medkit was available and used
         Assert.AreEqual(0, player.getMedkits());
     }
+
+    // -----------------------------------------------
+    // Invalid input tests
+    // -----------------------------------------------
+    
 
     [Test]
     public void Player_Health_Stays_100_When_Instantiated_with_Health_Greater_Than_100()

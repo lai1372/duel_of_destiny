@@ -51,11 +51,11 @@ public class MageTests
         // Assert - validate Mage is dead
         Assert.IsFalse(isAlive);
     }
-        
+
 
     [Test]
     public void Mage_Health_Does_Not_Go_Below_Zero()
-    {   
+    {
         // Arrange - new instance of Mage
         GameObject mageObject = new GameObject();
         Mage mage = mageObject.AddComponent<Mage>();
@@ -120,6 +120,37 @@ public class MageTests
 
         // Assert - validate only 1 medkit was available and used
         Assert.AreEqual(0, mage.getMedkits());
+    }
+
+    [Test]
+    public void Mage_Health_Stays_100_When_Instantiated_with_500_Health()
+    {
+        // Arrange - new instance of Mage with 500 health
+        GameObject mageObject = new GameObject();
+        Mage mage = mageObject.AddComponent<Mage>();
+        mage.setHealth(500);
+
+        // Act - get current health
+        int currentHealth = mage.getHealth();
+
+        // Assert - validate health stays at 100
+        Assert.AreEqual(100, currentHealth);
+
+    }
+
+    [Test]
+    public void Mage_Health_Stays_0_When_Health_Set_To_Negative()
+    {
+        // Arrange - new instance of Mage
+        GameObject mageObject = new GameObject();
+        Mage mage = mageObject.AddComponent<Mage>();
+        mage.setHealth(-50);
+
+        // Act - get current health
+        int currentHealth = mage.getHealth();
+
+        // Assert - validate health stays at 0
+        Assert.AreEqual(0, currentHealth);
     }
 }
 

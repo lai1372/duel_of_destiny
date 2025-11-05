@@ -7,12 +7,9 @@ public abstract class Enemy : Character
     [SerializeField] GameObject player;
     [SerializeField] float defaultStep = 0.05f;
 
-    public Enemy() : base(playerName: "Enemy", attackPower: 5)
+    public Enemy() : base(playerName: "Enemy")
     {
     }
-
-    // Abstract method to get attack power
-    public abstract int getAttackPower();
 
     void OnCollisionEnter2D(Collision2D collision) // Detect collision with player, attack on contact
     {
@@ -51,8 +48,9 @@ public abstract class Enemy : Character
         {
             useMedkit();
             Debug.Log("Enemy used a medkit!");
+            Debug.Log("Enemy Health after using medkit: " + getHealth());
         }
-    
+
 
 
         // Trigger Game Over when enemy dies
@@ -64,9 +62,9 @@ public abstract class Enemy : Character
                 gm.GameOver("Player");
             }
             else
-{
-    Debug.LogWarning("GameManager not found in scene.");
-}
+            {
+                Debug.LogWarning("GameManager not found in scene.");
+            }
         }
     }
 

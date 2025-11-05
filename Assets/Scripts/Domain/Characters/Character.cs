@@ -7,30 +7,30 @@ public abstract class Character : MonoBehaviour
 
     // Character properties
     [SerializeField] private string playerName;
-    [SerializeField] private int health;
     [SerializeField] private int medkits;
-    [SerializeField] private int defaultAttackPower;
+    [SerializeField] protected int health;
+    [SerializeField] protected int defaultAttackPower;
 
 
     // Character constructor
-    public Character(string playerName, int attackPower)
+    public Character(string playerName)
     {
         this.playerName = playerName;
         this.health = 100;
-        this.defaultAttackPower = attackPower;
         this.medkits = 1;
 
     }
-    
+
     // Initialize default values
     void Awake()
     {
         health = 100;
         medkits = 1;
+        defaultAttackPower = 5;
     }
 
 
-   // Getter and Setter methods
+    // Getter and Setter methods
     public string getName()
     {
         return playerName;
@@ -54,10 +54,6 @@ public abstract class Character : MonoBehaviour
     {
         return defaultAttackPower;
     }
-    public void setAttackPower(int attackPower)
-    {
-        this.defaultAttackPower = attackPower;
-    }
 
     // Character actions
     public virtual void attack(Character target)
@@ -73,6 +69,9 @@ public abstract class Character : MonoBehaviour
             health = 0;
         }
     }
+
+    // Abstract method to get attack power
+    public abstract int getAttackPower();
 
     public bool isAlive()
     {

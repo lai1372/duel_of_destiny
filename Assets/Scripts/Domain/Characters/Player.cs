@@ -8,9 +8,19 @@ public class Player : Character
     float speed;
     float horizontalInput;
     Spawner spawner;
-    public Player() : base(playerName: "Hero", attackPower: 15)
+    public Player() : base(playerName: "Hero")
     {
 
+    }
+
+    public override int getAttackPower()
+    {
+        return getDefaultAttackPower() + 15; // Player has a bonus of 15 to default attack power
+    }
+    public override void attack(Character target)
+    {
+        int damage = getAttackPower(); // Player's attack power
+        target.takeDamage(damage); // Attack enemy
     }
     void Start()
     {

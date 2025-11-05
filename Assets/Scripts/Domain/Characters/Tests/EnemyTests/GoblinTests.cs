@@ -26,15 +26,14 @@ public class GoblinTests
         // Arrange - new instance of Goblin
         GameObject goblinObject = new GameObject();
         Goblin goblin = goblinObject.AddComponent<Goblin>();
-        GameObject playerObject = new GameObject();
-        Player player = playerObject.AddComponent<Player>();
+        int damage = 30;
 
-        // Act - apply damage of 15
-        player.attack(goblin);
+        // Act - apply damage of 30
+        goblin.takeDamage(damage);
         int currentHealth = goblin.getHealth();
 
-        // Assert - validate health after damage is 80
-        Assert.AreEqual(85, currentHealth);
+        // Assert - validate health after damage is 70
+        Assert.AreEqual(70, currentHealth);
     }
 
     [Test]
@@ -52,11 +51,11 @@ public class GoblinTests
         // Assert - validate goblin is dead
         Assert.IsFalse(isAlive);
     }
-        
+
 
     [Test]
     public void Goblin_Health_Does_Not_Go_Below_Zero()
-    {   
+    {
         // Arrange - new instance of Goblin
         GameObject goblinObject = new GameObject();
         Goblin goblin = goblinObject.AddComponent<Goblin>();
@@ -111,7 +110,7 @@ public class GoblinTests
         // Arrange - new instance of Goblin
         GameObject goblinObject = new GameObject();
         Goblin goblin = goblinObject.AddComponent<Goblin>();
-        
+
         int damage = 50;
         int availableMedkits = goblin.getMedkits();
 
@@ -123,5 +122,37 @@ public class GoblinTests
         // Assert - validate only 1 medkit was available and used
         Assert.AreEqual(0, goblin.getMedkits());
     }
+
+    [Test]
+    public void Goblin_Health_Stays_100_When_Instantiated_with_500_Health()
+    {
+        // Arrange - new instance of Goblin with 500 health
+        GameObject goblinObject = new GameObject();
+        Goblin goblin = goblinObject.AddComponent<Goblin>();
+        goblin.setHealth(500);
+
+        // Act - get current health
+        int currentHealth = goblin.getHealth();
+
+        // Assert - validate health stays at 100
+        Assert.AreEqual(100, currentHealth);
+
+    }
+
+    [Test]
+    public void Goblin_Health_Stays_0_When_Health_Set_To_Negative()
+    {
+        // Arrange - new instance of Goblin
+        GameObject goblinObject = new GameObject();
+        Goblin goblin = goblinObject.AddComponent<Goblin>();
+        goblin.setHealth(-50);
+
+        // Act - get current health
+        int currentHealth = goblin.getHealth();
+
+        // Assert - validate health stays at 0
+        Assert.AreEqual(0, currentHealth);
+    }
+
 }
 

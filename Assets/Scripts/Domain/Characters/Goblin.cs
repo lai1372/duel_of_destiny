@@ -6,7 +6,7 @@ public class Goblin : Enemy
     }
 
     // Implement abstract method to get attack power and add Goblin-specific bonus
-    public override int getAttackPower() 
+    public override int getAttackPower()
     {
         return getDefaultAttackPower() + 3;
     }
@@ -15,7 +15,5 @@ public class Goblin : Enemy
         int damage = getAttackPower(); // Goblin's attack power
         target.takeDamage(damage); // Attack player
     }
-
-
 
 }

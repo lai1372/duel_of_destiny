@@ -119,5 +119,35 @@ public class PlayerTests
         // Assert - validate only 1 medkit was available and used
         Assert.AreEqual(0, player.getMedkits());
     }
+
+    [Test]
+    public void Player_Health_Stays_100_When_Instantiated_with_500_Health()
+    {
+        // Arrange - new instance of Player with 500 health
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        player.setHealth(500); // Assuming setHealth method exists for testing purposes
+
+        // Act - get current health
+        int currentHealth = player.getHealth();
+
+        // Assert - validate health is capped at 100
+        Assert.AreEqual(100, currentHealth);
+    }
+
+    [Test]
+    public void Player_Health_Stays_0_When_Health_Set_To_Negative()
+    {
+        // Arrange - new instance of Player
+        GameObject playerObject = new GameObject();
+        Player player = playerObject.AddComponent<Player>();
+        player.setHealth(-50); // Assuming setHealth method exists for testing purposes
+
+        // Act - get current health
+        int currentHealth = player.getHealth();
+
+        // Assert - validate health is not below 0
+        Assert.AreEqual(0, currentHealth);
+    }
 }
 

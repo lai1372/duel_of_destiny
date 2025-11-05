@@ -30,7 +30,6 @@ public abstract class Enemy : Character
     void Start()
     {
         // Initialize enemy position
-        // transform.position = new Vector2(3f, 0f);
         Debug.Log("Enemy Health: " + getHealth());
 
         player = GameObject.FindWithTag("Player");

@@ -1,7 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 public class Player : Character
 {
     Rigidbody2D rb;
@@ -15,13 +14,15 @@ public class Player : Character
 
     public override int getAttackPower()
     {
-        return getDefaultAttackPower() + 9; // Player has a bonus of 15 to default attack power
+        return getDefaultAttackPower() + 9; // Player has a bonus of 9 to default attack power
     }
     public override void attack(Character target)
     {
         int damage = getAttackPower(); // Player's attack power
         target.takeDamage(damage); // Attack enemy
     }
+    Animator animator;
+    Transform model;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -29,6 +30,8 @@ public class Player : Character
         gameObject.transform.position = new Vector2(-3f, 0f); // Starting position
 
         spawner = FindFirstObjectByType<Spawner>();
+        animator = GetComponentInChildren<Animator>();
+        model = animator != null ? animator.transform : null;
 
     }
 
@@ -69,10 +72,23 @@ public class Player : Character
         {
             rb.AddForce(Vector2.up * 500f);
         }
+        if (animator != null)
+        {
+            float v = rb.linearVelocity.magnitude;
+            animator.SetFloat("Speed", v);
 
+            // Face direction by rotating model on Y axis
+            if (model != null)
+            {
+                model.localRotation = Quaternion.Euler(0f, (horizontalInput < 0) ? 180f : 0f, 0f);
+            }
+        }
         // Handle attack on spacebar press
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (animator != null)
+                animator.SetTrigger("Attack");
+
             GameObject enemyObj = spawner.spawnedEnemy;
             if (enemyObj != null)
             {

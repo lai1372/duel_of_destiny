@@ -26,12 +26,10 @@ public class Spawner : MonoBehaviour
         spawnedEnemy = Instantiate(prefabToSpawn, transform.position, transform.rotation);
         prefabName = spawnedEnemy.name;
 
-        Debug.Log("Spawning prefab: " + prefabName);
-
         Enemy enemyComponent = spawnedEnemy.GetComponent<Enemy>();
         if (enemyComponent != null)
         {
-            Debug.Log("Spawned enemy attack power: " + enemyComponent.getAttackPower());
+            Debug.Log(prefabName + " spawned! " + prefabName + " Attack power: " + enemyComponent.getAttackPower() + ", Health: " + enemyComponent.getHealth());
         }
         else
         {

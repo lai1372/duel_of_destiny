@@ -12,22 +12,8 @@ public abstract class Enemy : Character
     }
     Animator animator;
     Transform model;
-    // void OnCollisionEnter2D(Collision2D collision) // Detect collision with player, attack on contact
-    // {
-    //     if (collision.gameObject.CompareTag("Player"))
-    //     {
 
-    //         Character playerCharacter = collision.gameObject.GetComponent<Character>();
-    //         if (playerCharacter != null)
-    //         {
-    //             attack(playerCharacter);
-    //             Debug.Log("Enemy attacked the player on collision!");
-    //             Debug.Log("Player Health after attack: " + playerCharacter.getHealth());
-    //         }
-    //     }
-    // }
-
-        void OnCollisionEnter2D(Collision2D collision) // Detect collision with player, attack on contact
+    void OnCollisionEnter2D(Collision2D collision) // Detect collision with player, attack on contact
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -40,15 +26,12 @@ public abstract class Enemy : Character
                 // Apply damage (consider timing this with an Animation Event for better feel)
                 attack(playerCharacter);
 
-                Debug.Log("Enemy attacked the player on collision!");
-                Debug.Log("Player Health after attack: " + playerCharacter.getHealth());
+                Debug.Log("Enemy attacked the player on collision! Player Health after attack: " + playerCharacter.getHealth());
             }
         }
     }
     void Start()
     {
-        // Initialize enemy position
-        Debug.Log("Enemy Health: " + getHealth());
 
         player = GameObject.FindWithTag("Player");
 
@@ -65,13 +48,6 @@ public abstract class Enemy : Character
     void Update()
     {
         // Move towards player
-        // if (player != null && isAlive())
-        // {
-        //     float step = defaultStep * Time.deltaTime;
-        //     transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
-        // }
-
-        // Move towards player
         float speedThisFrame = 0f;
         if (player != null)
         {
@@ -83,7 +59,8 @@ public abstract class Enemy : Character
             if (model != null)
             {
                 bool faceRight = (target.x - start.x) >= 0f;
-                model.localRotation = Quaternion.Euler(0f, faceRight ? 0f : 180f, 0f);
+                model.localRotation = Quaternion.Euler(0f, faceRight ? 180f : 0f, 0f);
+
             }
 
             // Move
@@ -106,8 +83,7 @@ public abstract class Enemy : Character
         if (getHealth() <= 20 && getMedkits() > 0)
         {
             useMedkit();
-            Debug.Log("Enemy used a medkit!");
-            Debug.Log("Enemy Health after using medkit: " + getHealth());
+            Debug.Log("Enemy used a medkit! Enemy Health after using medkit: " + getHealth());
         }
 
 

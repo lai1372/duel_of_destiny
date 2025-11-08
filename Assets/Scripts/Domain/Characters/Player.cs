@@ -51,7 +51,7 @@ public class Player : Character
             bool used = useMedkit();
             if (used)
             {
-                Debug.Log("Player used a medkit!");
+                Debug.Log("Player used a medkit!" + " Health after medkit: " + getHealth());
             }
             else
             {
@@ -70,7 +70,7 @@ public class Player : Character
         // Handle jump when up arrow key pressed
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            rb.AddForce(Vector2.up * 500f);
+            rb.AddForce(Vector2.up * 800f);
         }
         if (animator != null)
         {
@@ -80,7 +80,7 @@ public class Player : Character
             // Face direction by rotating model on Y axis
             if (model != null)
             {
-                model.localRotation = Quaternion.Euler(0f, (horizontalInput < 0) ? 180f : 0f, 0f);
+                model.localRotation = Quaternion.Euler(0f, (horizontalInput < 0) ? 0f : 180f, 0f);
             }
         }
         // Handle attack on spacebar press
@@ -97,8 +97,7 @@ public class Player : Character
                 {
                     Enemy enemy = enemyObj.GetComponent<Enemy>();
                     attack(enemy);
-                    Debug.Log("Player attacked the enemy!");
-                    Debug.Log("Enemy Health after attack: " + enemy.getHealth());
+                    Debug.Log("Player attacked the enemy! Enemy Health after attack: " + enemy.getHealth());
 
                     if (!enemy.isAlive())
                     {

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// TODO: Enemy to use medkit and follow player and health bar
 public abstract class Enemy : Character
 {
 

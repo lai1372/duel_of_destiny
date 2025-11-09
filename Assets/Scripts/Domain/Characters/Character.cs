@@ -81,7 +81,6 @@ public abstract class Character : MonoBehaviour
 
     public bool useMedkit()
     {
-        Debug.Log("Attempting to use medkit. Medkits available: " + medkits);
         if (medkits > 0)
         {
             setHealth(getHealth() + 20); // Each medkit restores 20 health
@@ -90,7 +89,6 @@ public abstract class Character : MonoBehaviour
                 setHealth(100); // Cap health at 100
             }
             medkits--; // Decrease medkit count
-            Debug.Log("Medkit used. Current health: " + getHealth() + ". Medkits left: " + medkits);
             return true;
         }
         Debug.Log("No medkits left to use.");

@@ -55,7 +55,7 @@ public abstract class Enemy : Character
             Vector2 start = transform.position;
             Vector2 target = player.transform.position;
 
-            // Face the player by rotating the model on Y (0/180)
+            // Face the player by rotating the model
             if (model != null)
             {
                 bool faceRight = (target.x - start.x) >= 0f;
@@ -71,7 +71,7 @@ public abstract class Enemy : Character
             speedThisFrame = (newPos - start).magnitude / Time.deltaTime; // world units / sec
         }
 
-        // --- Animation parameters ---
+       
         if (animator != null)
         {
             // Drive Idle<->Walk

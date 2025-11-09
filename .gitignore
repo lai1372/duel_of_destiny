@@ -13,3 +13,4 @@
 *.tmp
 *.user
 *.userprefs
+mono_crash.*

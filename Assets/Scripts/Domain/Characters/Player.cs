@@ -51,11 +51,11 @@ public class Player : Character
             bool used = useMedkit();
             if (used)
             {
-                Debug.Log("Player used a medkit!" + " Health after medkit: " + getHealth());
+                Debug.Log("Player used a medkit! Player Health after using medkit: " + getHealth());
             }
             else
             {
-                Debug.Log("Player tried to use a medkit but had none.");
+                Debug.Log("No medkits available!");
             }
         }
 
